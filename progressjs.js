@@ -40,8 +40,14 @@ class ProgressBar{
             }
         )
     }
+    checkOption(key){
+        return this.options.hasOwnProperty(key)
+    }
+    getOption(key){
+        return this.checkOption(key) ? this['options'][key] : null
+    }
     append(){
-
+        if(this.)
     }
     constructor(options={}){
         this.setOptions(options)
