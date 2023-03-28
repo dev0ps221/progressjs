@@ -4,7 +4,7 @@
     --progress-color:#111;
     --progress-container-color:#fff;
     --progress-position:15;
-    --max-position:100;
+    --progress-max-position:100;
     width: 100%;
     position: relative;
     isolation: isolate;
@@ -18,5 +18,5 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: calc(1% * ((var(--progress-position))/(var(--max-position)/100)));
+    width: calc(1% * ((var(--progress-position))/(var(--progress-max-position)/100)));
 }

@@ -125,7 +125,13 @@ class ProgressBar{
             this.setCss('--progress-position', this.getOption('position'))
         }
         if(this.checkOption('maxPosition')){
-            this.setCss('--max-position', this.getOption('maxPosition'))
+            this.setCss('--progress-max-position', this.getOption('maxPosition'))
+        }
+        if(this.checkOption('position')){
+            this.setCss('--progress-position', this.getOption('position'))
+        }
+        if(this.checkOption('maxPosition')){
+            this.setCss('--progress-max-position', this.getOption('maxPosition'))
         }
         if(this.checkOption('color')){
             this.setCss('--progress-color', this.getOption('color'))
