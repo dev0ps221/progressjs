@@ -1,16 +1,22 @@
-.pj-progreggbar{
+.pj-progressbar{
     --progress-container-height:5px;
     --progress-height:5px;
     --progress-color:#111;
     --progress-container-color:#fff;
-    --position:0;
+    --progress-position:15;
     --max-position:100;
     width: 100%;
     position: relative;
+    isolation: isolate;
     height: var(--progress-container-height);
     background: var(--progress-container-color);
 }
-.pj-progreggbar::before{
-    height: var(--progress-container-height);
-    background: var(--progress-container-color);
+.pj-progressbar::before{
+    content: '';
+    height: var(--progress-height);
+    background: var(--progress-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(1% * ((var(--progress-position))/(var(--max-position)/100)));
 }
