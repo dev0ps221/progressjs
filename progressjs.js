@@ -42,8 +42,17 @@ class ProgressBar{
 
 
     //the more css stuff
-    setCssVar(){
-
+    checkStyleElement(){
+        return  this.hasOwnProperty('styleElement') && this.styleElement
+    }
+    getStyleElement(){
+        return this.checkStyleElement() ? this.styleElement : null
+    }
+    setCss(property,value){
+        this.checkStyleElement() ? this.getStyleElement().setProperty(property,value) : null
+    }
+    getCss(property){
+        return this.checkStyleElement() ? this.getStyleElement().getPropertyValue(property) : null
     }
 
 
@@ -64,11 +73,15 @@ class ProgressBar{
 
     setPosition(position){
         if(position < 0){
-            position = 0
+            this.setOption('position',0)
         }
         if(position>this.getOption('maxPosition')){
-            position = this.getOption('maxPosition')
+            this.setOption('position',this.getOption('maxPosition'))
         }
+    }
+
+    setLimit(limit){
+        this.setOption('maxPosition', limit)
     }
 
 
@@ -78,6 +91,7 @@ class ProgressBar{
     createElement(){
         this.element = document.createElement('div')
         this.element.classList.add('pj-progressbar')
+        this.styleElement = getComputedStyle(this.getElement())
     }
     checkElement(){
         return this.hasOwnProperty('element') && this.element
@@ -86,7 +100,12 @@ class ProgressBar{
         return this.checkElement() ? this.element : this.createElement()
     }
     refresh(){
-
+        if(this.checkOption('position')){
+            this.setCss('--position', this.getOption('position'))
+        }
+        if(this.checkOption('maxPosition')){
+            this.setCss('--max-position', this.getOption('position'))
+        }
     }
     showProgress(){
         if(this.checkOption('target')){
@@ -100,5 +119,6 @@ class ProgressBar{
 
     constructor(options={}){
         this.setOptions(options)
+        this.buildProgress()
     }
 }
