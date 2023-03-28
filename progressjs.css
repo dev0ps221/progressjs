@@ -8,6 +8,8 @@
     width: 100%;
     position: relative;
     isolation: isolate;
+    display: grid;
+    align-items: center;
     height: var(--progress-container-height);
     background: var(--progress-container-color);
 }
@@ -17,6 +19,5 @@
     background: var(--progress-color);
     position: absolute;
     left: 0;
-    top: 0;
     width: calc(1% * ((var(--progress-position))/(var(--progress-max-position)/100)));
 }

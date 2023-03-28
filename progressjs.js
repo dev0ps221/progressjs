@@ -7,6 +7,7 @@ class ProgressBar{
         color:"#fff",
         height:"5px",
         containerHeight:"5rem",
+        playInterval:5,
         background:"#00c"
     }
     
@@ -40,6 +41,20 @@ class ProgressBar{
             }
         )
         return this
+    }
+    setPlayInterval(interval){
+        interval = parseInt(interval)
+        if(!isNaN(interval) && interval < 80){
+            this.setOption('playInterval', interval)
+            return interval
+        }
+        return this.getOption('playInterval')
+    }
+    checkPlayInterval(){
+        return this.checkOption('playInterval')
+    }
+    getPlayInterval(){
+        return this.checkOption('playInterval') ? this.getOption('playInterval') : this.setPlayInterval(4)
     }
     checkOption(key){
         return this.options.hasOwnProperty(key)
@@ -127,11 +142,11 @@ class ProgressBar{
         if(this.checkOption('maxPosition')){
             this.setCss('--progress-max-position', this.getOption('maxPosition'))
         }
-        if(this.checkOption('position')){
-            this.setCss('--progress-position', this.getOption('position'))
+        if(this.checkOption('height')){
+            this.setCss('--progress-height', this.getOption('height'))
         }
-        if(this.checkOption('maxPosition')){
-            this.setCss('--progress-max-position', this.getOption('maxPosition'))
+        if(this.checkOption('containerHeight')){
+            this.setCss('--progress-container-height', this.getOption('containerHeight'))
         }
         if(this.checkOption('color')){
             this.setCss('--progress-color', this.getOption('color'))
@@ -140,6 +155,17 @@ class ProgressBar{
             this.setCss('--progress-container-color', this.getOption('background'))
         }
         return this
+    }
+    autoplay(){
+        function move(){
+            if(pos >= this.getOption('maxPosition')){
+                pos = 0
+            }else{
+               pos+=5
+            }
+            this.setPosition(pos)
+            setTimeout(move,this.getPlayInterval())
+        }
     }
     showProgress(){
         if(this.checkOption('target')){
@@ -151,6 +177,7 @@ class ProgressBar{
         this.createElement()
         return this
     }
+
 
 
     constructor(options={}){
