@@ -6,8 +6,8 @@ class ProgressBar{
         maxPosition : 100,
         color:"#fff",
         height:"5px",
-        containerHeight:"5rem",
-        playInterval:5,
+        containerHeight:"10px",
+        playInterval:.2,
         background:"#00c"
     }
     
@@ -35,7 +35,6 @@ class ProgressBar{
     setOptions(options){
         Object.keys(options).forEach(
             key=>{
-                console.log
                 const value = options[key]
                 this.setOption(key,value)
             }
@@ -157,15 +156,15 @@ class ProgressBar{
         return this
     }
     autoplay(){
-        function move(){
-            if(pos >= this.getOption('maxPosition')){
-                pos = 0
+        const move = ()=>{
+            if(this.getOption('position') >= this.getOption('maxPosition')){
+                this.setPosition(0)
             }else{
-               pos+=5
+                this.setPosition(this.getOption('position')+5)
             }
-            this.setPosition(pos)
-            setTimeout(move,this.getPlayInterval())
+            setTimeout(move,(this.getPlayInterval()+.5)*1000)
         }
+        move()
     }
     showProgress(){
         if(this.checkOption('target')){
@@ -175,6 +174,7 @@ class ProgressBar{
     }
     buildProgress(){
         this.createElement()
+        this.refresh()
         return this
     }
 

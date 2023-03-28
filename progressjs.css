@@ -1,10 +1,6 @@
 .pj-progressbar{
-    --progress-container-height:5px;
-    --progress-height:5px;
-    --progress-color:#111;
-    --progress-container-color:#fff;
-    --progress-position:15;
-    --progress-max-position:100;
+    --transition-time:.5s;
+    transition: .5s ease-in;
     width: 100%;
     position: relative;
     isolation: isolate;
@@ -14,10 +10,22 @@
     background: var(--progress-container-color);
 }
 .pj-progressbar::before{
+    transition: .5s ease-in;
     content: '';
     height: var(--progress-height);
     background: var(--progress-color);
     position: absolute;
     left: 0;
     width: calc(1% * ((var(--progress-position))/(var(--progress-max-position)/100)));
+}
+.pj-progressbar::after{
+    transition: .5s ease-in;
+    content: '';
+    height: var(--progress-height);
+    background: var(--progress-color);
+    position: absolute;
+    left: 0;
+    --width: calc(1% * ((var(--progress-position))/(var(--progress-max-position)/100)));
+    --size: calc(var(--width) - 5px);
+    width: var(--width);
 }
