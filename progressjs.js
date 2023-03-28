@@ -5,7 +5,9 @@ class ProgressBar{
         position : 0,
         maxPosition : 100,
         color:"#fff",
-        background:"#333"
+        height:"5px",
+        containerHeight:"5rem",
+        background:"#00c"
     }
     
     setTarget(target){
@@ -124,6 +126,12 @@ class ProgressBar{
         }
         if(this.checkOption('maxPosition')){
             this.setCss('--max-position', this.getOption('maxPosition'))
+        }
+        if(this.checkOption('color')){
+            this.setCss('--progress-color', this.getOption('color'))
+        }
+        if(this.checkOption('background')){
+            this.setCss('--progress-container-color', this.getOption('background'))
         }
         return this
     }
