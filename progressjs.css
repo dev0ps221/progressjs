@@ -1,0 +1,15 @@
+.pj-progreggbar{
+    --progress-container-height:5px;
+    --progress-height:5px;
+    --progress-color:#111;
+    --progress-container-color:#fff;
+    --position:;
+    width: 100%;
+    position: relative;
+    height: var(--progress-container-height);
+    background: var(--progress-container-color);
+}
+.pj-progreggbar::before{
+    height: var(--progress-container-height);
+    background: var(--progress-container-color);
+}

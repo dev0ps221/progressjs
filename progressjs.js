@@ -1,8 +1,12 @@
 class ProgressBar{
-    position = 0
     options = {
+        position : 0,
+        maxPosition : 100,
         color:"#fff",
         background:"#333"
+    }
+    refresh(){
+
     }
     moveTo(position){
         this.position = position
@@ -21,6 +25,14 @@ class ProgressBar{
                 'target',target
             )
             this.target = target
+        }
+    }
+    setPosition(position){
+        if(position < 0){
+            position = 0
+        }
+        if(position>this.getOption('maxPosition')){
+            position = this.getOption('maxPosition')
         }
     }
     setColor(color){
@@ -46,8 +58,14 @@ class ProgressBar{
     getOption(key){
         return this.checkOption(key) ? this['options'][key] : null
     }
-    append(){
-        if(this.)
+    showProgress(){
+        if(this.checkOption('target')){
+
+        }
+    }
+    buildProgress(){
+        this.element = document.createElement('div')
+        this.element.classList.add('pj-progressbar')
     }
     constructor(options={}){
         this.setOptions(options)
