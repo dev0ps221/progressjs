@@ -4,11 +4,11 @@ class ProgressBar{
     options = {
         position : 0,
         maxPosition : 100,
-        color:"#fff",
+        color:"#000",
         height:"5px",
         containerHeight:"10px",
         playInterval:.2,
-        background:"#00c"
+        background:"#0001"
     }
     
     setTarget(target){
