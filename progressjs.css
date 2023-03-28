@@ -3,7 +3,8 @@
     --progress-height:5px;
     --progress-color:#111;
     --progress-container-color:#fff;
-    --position:;
+    --position:0;
+    --max-position:100;
     width: 100%;
     position: relative;
     height: var(--progress-container-height);

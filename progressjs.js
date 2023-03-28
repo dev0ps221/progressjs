@@ -1,38 +1,19 @@
 class ProgressBar{
+
+    //the more options stuff
     options = {
         position : 0,
         maxPosition : 100,
         color:"#fff",
         background:"#333"
     }
-    refresh(){
-
-    }
-    moveTo(position){
-        this.position = position
-    }
-    increase(quantity){
-        this.position += quantity
-        this.position = this.position > 100 ? 100 : this.position
-    }
-    decrease(quantity){
-        this.position -= quantity
-        this.position = this.position < 0 ? 0 : this.position
-    }
+    
     setTarget(target){
         if(target instanceof HTMLElement){
             this.setOption(
                 'target',target
             )
             this.target = target
-        }
-    }
-    setPosition(position){
-        if(position < 0){
-            position = 0
-        }
-        if(position>this.getOption('maxPosition')){
-            position = this.getOption('maxPosition')
         }
     }
     setColor(color){
@@ -58,15 +39,65 @@ class ProgressBar{
     getOption(key){
         return this.checkOption(key) ? this['options'][key] : null
     }
-    showProgress(){
-        if(this.checkOption('target')){
 
+
+    //the more css stuff
+    setCssVar(){
+
+    }
+
+
+    //the more position stuff
+    moveTo(position){
+        this.setPosition(position)
+    }
+    increase(quantity){
+        this.moveTo(this.getPosition()+quantity)
+    }
+    decrease(quantity){
+        this.moveTo(this.getPosition()-quantity)
+    }
+
+    getposition(){
+        return  this.getOption('position')
+    }
+
+    setPosition(position){
+        if(position < 0){
+            position = 0
+        }
+        if(position>this.getOption('maxPosition')){
+            position = this.getOption('maxPosition')
         }
     }
-    buildProgress(){
+
+
+
+    //the more progress stuff
+
+    createElement(){
         this.element = document.createElement('div')
         this.element.classList.add('pj-progressbar')
     }
+    checkElement(){
+        return this.hasOwnProperty('element') && this.element
+    }
+    getElement(){
+        return this.checkElement() ? this.element : this.createElement()
+    }
+    refresh(){
+
+    }
+    showProgress(){
+        if(this.checkOption('target')){
+            this.getOption('target').appendChild(this.getElement())
+        }
+    }
+    buildProgress(){
+        this.createElement()
+    }
+
+
     constructor(options={}){
         this.setOptions(options)
     }
