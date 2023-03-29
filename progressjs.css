@@ -1,3 +1,17 @@
+.pj-page-wrapper{
+    display: grid;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+.pj-page-wrapper .pj-progressbar,.pj-page-wrapper .pj-big-progressbar::before{
+    --progress-height: 100vh !important;
+    height: 100vh;
+}
 .pj-progressbar{
     --transition-time:.5s;
     --progress-width: calc(1% * ((var(--progress-position))/(var(--progress-max-position)/100)));

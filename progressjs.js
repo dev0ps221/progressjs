@@ -173,7 +173,7 @@ class ProgressBar{
         }
         return this
     }
-    autoplay(){
+    progress(){
         const move = ()=>{
             if(this.getOption('position') >= this.getOption('maxPosition')){
                 this.setPosition(0)
@@ -278,13 +278,15 @@ class ProgressBar{
                 this.mouseDown = null
             }
         )
+        return this
     }
 
 
     constructor(options={}){
         this.setOptions(options)
-        this.buildProgress()
-        this.listenToActions()
+        .buildProgress()
+        .listenToActions()
+        .showProgress()
         return this
     }
 }
