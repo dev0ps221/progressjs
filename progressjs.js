@@ -165,6 +165,9 @@ class ProgressBar{
         if(this.checkOption('color')){
             this.setCss('--progress-color', this.getOption('color'))
         }
+        if(this.checkOption('big')){
+            this.checkElement() ? this.getElement().classList.add('pj-big-progressbar') : null
+        }
         if(this.checkOption('background')){
             this.setCss('--progress-container-color', this.getOption('background'))
         }
@@ -220,29 +223,36 @@ class ProgressBar{
     }
 
     listenToActions(){
-        // this.getElement().removeEventListener(
-        //     'click',e=>{
-        //         this.clickAction(e)
-        //     }
-        // )
-        // this.getElement().addEventListener(
-        //     'click',e=>{
-        //         this.clickAction(e)
-        //     }
-        // )
+        this.getElement().removeEventListener(
+            'click',e=>{
+                this.clickAction(e)
+            }
+        )
+        this.getElement().addEventListener(
+            'click',e=>{
+                this.clickAction(e)
+            }
+        )
         this.getElement().removeEventListener(
             'mousedown',e=>{
+                this.setCss('--transition-time', '0s')
+                this.setCss('cursor', 'ew-resize')
+                this.mouseDown = true
                 this.dragAction(e)
             }
         )
         this.getElement().addEventListener(
             'mousedown',e=>{
+                this.setCss('--transition-time', '0s')
+                this.setCss('cursor', 'ew-resize')
+                this.mouseDown = true
                 this.dragAction(e)
             }
         )
         this.getElement().removeEventListener(
             'mousemove',e=>{
                 if(this.mouseDown){
+                    console.log('dragging')
                     this.dragAction(e)
                 }
             }
@@ -254,13 +264,17 @@ class ProgressBar{
                 }
             }
         )
-        this.getElement().removeEventListener(
+        window.removeEventListener(
             'mouseup',e=>{
+                this.setCss('--transition-time', '.5s')
+                this.setCss('cursor', 'default')
                 this.mouseDown = null
             }
         )
-        this.getElement().addEventListener(
+        window.addEventListener(
             'mouseup',e=>{
+                this.setCss('--transition-time', '.5s')
+                this.setCss('cursor', 'default')
                 this.mouseDown = null
             }
         )
