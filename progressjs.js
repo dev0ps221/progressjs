@@ -122,6 +122,18 @@ class ProgressBar{
 
     //the more progress stuff
 
+    getRect(){
+        return this.element.getBoundingClientRect()
+    }
+
+    getLeftEndVal(){
+        return this.getRect().left
+    }
+
+    getRightEndVal(){
+        return this.getRect().right
+    }
+
     createElement(){
         this.element = document.createElement('div')
         this.element.classList.add('pj-progressbar')
@@ -172,12 +184,32 @@ class ProgressBar{
         }
         return this
     }
+
     buildProgress(){
         this.createElement()
         this.refresh()
         return this
     }
 
+
+    //more interactions related stuff
+
+    clickAction(event){
+        
+    }
+
+    listenToActions(){
+        this.getElement().removeEventListener(
+            'click',e=>{
+                this.clickAction(e)
+            }
+        )
+        this.getElement().addEventListener(
+            'click',e=>{
+                this.clickAction(e)
+            }
+        )
+    }
 
 
     constructor(options={}){

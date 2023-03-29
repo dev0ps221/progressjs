@@ -12,7 +12,7 @@
     overflow: hidden;
 }
 .pj-progressbar,.pj-progressbar::before,.pj-progressbar::after{
-    border-radius: 50%;
+    border-radius: 25%;
 }
 .pj-progressbar::before{
     transition: .5s ease-in;
@@ -27,7 +27,8 @@
     transition: .5s ease-in;
     content: '';
     height: var(--progress-height);
-    background: red;
+    background: var(--progress-color);
+    filter: invert(50%);
     position: absolute;
     --size:15px;
     --left: calc(var(--progress-width) - var(--size));
