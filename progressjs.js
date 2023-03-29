@@ -1,4 +1,7 @@
 class ProgressBar{
+    //useful props for events
+    mouseDown = null
+
 
     //the more options stuff
     options = {
@@ -195,21 +198,70 @@ class ProgressBar{
     //more interactions related stuff
 
     clickAction(event){
-        console.log(this.getLeftEndVal()," is LeftEndVal")
-        console.log(this.getRightEndVal()," is RightEndVal")
-        console.log(event.clientX,' is clientX')
-        console.log(event.clientY,' is clientY')
+        const getTargettedPosition = ()=>{
+            const length = Math.ceil(this.getStyleElement().width.replace("px",""))
+            const distance = Math.ceil(event.clientX) - Math.ceil(this.getLeftEndVal())
+            const percent = distance/(length/100)
+            const position = (this.getOption('maxPosition')/100) * percent
+            return  position
+        }
+        this.setPosition(getTargettedPosition())        
+
+    }
+    dragAction(event){
+        const getTargettedPosition = ()=>{
+            const length = Math.ceil(this.getStyleElement().width.replace("px",""))
+            const distance = Math.ceil(event.clientX) - Math.ceil(this.getLeftEndVal())
+            const percent = distance/(length/100)
+            const position = (this.getOption('maxPosition')/100) * percent
+            return  position
+        }
+        this.setPosition(getTargettedPosition())        
     }
 
     listenToActions(){
+        // this.getElement().removeEventListener(
+        //     'click',e=>{
+        //         this.clickAction(e)
+        //     }
+        // )
+        // this.getElement().addEventListener(
+        //     'click',e=>{
+        //         this.clickAction(e)
+        //     }
+        // )
         this.getElement().removeEventListener(
-            'click',e=>{
-                this.clickAction(e)
+            'mousedown',e=>{
+                this.dragAction(e)
             }
         )
         this.getElement().addEventListener(
-            'click',e=>{
-                this.clickAction(e)
+            'mousedown',e=>{
+                this.dragAction(e)
+            }
+        )
+        this.getElement().removeEventListener(
+            'mousemove',e=>{
+                if(this.mouseDown){
+                    this.dragAction(e)
+                }
+            }
+        )
+        this.getElement().addEventListener(
+            'mousemove',e=>{
+                if(this.mouseDown){
+                    this.dragAction(e)
+                }
+            }
+        )
+        this.getElement().removeEventListener(
+            'mouseup',e=>{
+                this.mouseDown = null
+            }
+        )
+        this.getElement().addEventListener(
+            'mouseup',e=>{
+                this.mouseDown = null
             }
         )
     }
@@ -218,6 +270,7 @@ class ProgressBar{
     constructor(options={}){
         this.setOptions(options)
         this.buildProgress()
+        this.listenToActions()
         return this
     }
 }
