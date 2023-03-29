@@ -195,7 +195,10 @@ class ProgressBar{
     //more interactions related stuff
 
     clickAction(event){
-        
+        console.log(this.getLeftEndVal()," is LeftEndVal")
+        console.log(this.getRightEndVal()," is RightEndVal")
+        console.log(event.clientX,' is clientX')
+        console.log(event.clientY,' is clientY')
     }
 
     listenToActions(){
