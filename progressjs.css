@@ -11,9 +11,6 @@
     background: var(--progress-container-color);
     overflow: hidden;
 }
-.pj-progressbar,.pj-progressbar::before,.pj-progressbar::after{
-    border-radius: 8%;
-}
 .pj-progressbar::before{
     transition: var(--transition-time) ease-in;
     content: '';
@@ -24,6 +21,7 @@
     width: var(--progress-width);
 }
 .pj-progressbar::after{
+    opacity: 0;
     transition: .5s ease-in;
     content: '';
     height: var(--progress-height);
@@ -34,10 +32,10 @@
     --left: calc(var(--progress-width) - var(--size));
     width: var(--size);
     left: var(--left);
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
 }
-
+.pj-progressbar.hasTrack::after{
+    opacity: 1;
+}
 .pj-big-progressbar{
     height: calc(var(--progress-container-height)*2);
 }

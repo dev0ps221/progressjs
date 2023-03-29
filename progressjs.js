@@ -8,7 +8,7 @@ class ProgressBar{
         position : 0,
         maxPosition : 100,
         color:"#000",
-        height:"5px",
+        height:"85px",
         containerHeight:"10px",
         playInterval:.2,
         background:"#0001"
